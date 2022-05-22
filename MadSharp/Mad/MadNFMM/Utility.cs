@@ -1,15 +1,13 @@
 using System;
+using System.Collections.Generic;
 using boolean = System.Boolean;
 
-namespace Cum
-{
-    public class Utility
-    {
+namespace GameLogic {
+    public class Utility {
         /**
-         * This ais an utility class, so it can't be inherited.
+         * This is a utility class, so it can't be inherited.
          */
-        private Utility()
-        {
+        private Utility() {
         }
 
         /**
@@ -22,24 +20,20 @@ namespace Cum
          * @param i The position of the value (starting from 0)
          * @return An integer containing the value
          */
-        static int Getvalue(string astring, string string262, int i)
-        {
+        static int Getvalue(string astring, string string262, int i) {
             var i263 = 0;
             var string264 = "";
-            for (var i265 = astring.Length + 1; i265 < string262.Length; i265++)
-            {
+            for(var i265 = astring.Length + 1; i265 < string262.Length; i265++) {
                 var string266 = string262[i265];
-                if (string266 == ',' || string266 == ')')
-                {
+                if(string266 == ',' || string266 == ')') {
                     i263++;
                     i265++;
                 }
-                if (i263 == i)
-                {
+                if(i263 == i) {
                     string264 = $"{string264}{string262[i265]}";
                 }
             }
-            return (int) float.Parse(string264);
+            return (int)float.Parse(string264);
         }
 
         /**
@@ -48,36 +42,35 @@ namespace Cum
          * @param i the value position
          * @return the value at the position
          */
-        public static int GetServerValue(string astring, int i)
-        {
+        public static int GetServerValue(string astring, int i) {
             throw new NotImplementedException();
-//        int i437 = -1;
-//        try {
-//            int i438 = 0;
-//            int i439 = 0;
-//            int i440 = 0;
-//            String string441;
-//            String string442 = "";
-//            for (; i438 < astring.length() && i440 != 2; i438++) {
-//                string441 = "" + astring.charAt(i438);
-//                if (string441.equals("|")) {
-//                    i439++;
-//                    if (i440 == 1 || i439 > i) {
-//                        i440 = 2;
-//                    }
-//                } else if (i439 == i) {
-//                    string442 = "" + string442 + string441;
-//                    i440 = 1;
-//                }
-//            }
-//            if (string442.equals("")) {
-//                string442 = "-1";
-//            }
-//            i437 = Integer.parseInt(string442);
-//        } catch (Exception ignored) {
-//
-//        }
-//        return i437;
+            //        int i437 = -1;
+            //        try {
+            //            int i438 = 0;
+            //            int i439 = 0;
+            //            int i440 = 0;
+            //            String string441;
+            //            String string442 = "";
+            //            for (; i438 < astring.length() && i440 != 2; i438++) {
+            //                string441 = "" + astring.charAt(i438);
+            //                if (string441.equals("|")) {
+            //                    i439++;
+            //                    if (i440 == 1 || i439 > i) {
+            //                        i440 = 2;
+            //                    }
+            //                } else if (i439 == i) {
+            //                    string442 = "" + string442 + string441;
+            //                    i440 = 1;
+            //                }
+            //            }
+            //            if (string442.equals("")) {
+            //                string442 = "-1";
+            //            }
+            //            i437 = Integer.parseInt(string442);
+            //        } catch (Exception ignored) {
+            //
+            //        }
+            //        return i437;
         }
 
         /**
@@ -90,10 +83,8 @@ namespace Cum
          * @param m the Medium
          * @return The 2D X coordinate.
          */
-        static int Xs(int i, int i338)
-        {
-            if (i338 < Medium.Cz)
-            {
+        static int Xs(int i, int i338) {
+            if(i338 < Medium.Cz) {
                 i338 = Medium.Cz;
             }
             return (i338 - Medium.FocusPoint) * (Medium.Cx - i) / i338 + i;
@@ -109,10 +100,8 @@ namespace Cum
          * @param m the Medium
          * @return The 2D Y coordinate.
          */
-        static int Ys(int i, int i339)
-        {
-            if (i339 < Medium.Cz)
-            {
+        static int Ys(int i, int i339) {
+            if(i339 < Medium.Cz) {
                 i339 = Medium.Cz;
             }
             return (i339 - Medium.FocusPoint) * (Medium.Cy - i) / i339 + i;
@@ -120,19 +109,15 @@ namespace Cum
 
         // alt
 
-        static int AltXs(int i, int i260)
-        {
-            if (i260 < 50)
-            {
+        static int AltXs(int i, int i260) {
+            if(i260 < 50) {
                 i260 = 50;
             }
             return (i260 - Medium.FocusPoint) * (Medium.Cx - i) / i260 + i;
         }
 
-        static int AltYs(int i, int i261)
-        {
-            if (i261 < 50)
-            {
+        static int AltYs(int i, int i261) {
+            if(i261 < 50) {
                 i261 = 50;
             }
             return (i261 - Medium.FocusPoint) * (Medium.Cy - i) / i261 + i;
@@ -146,29 +131,23 @@ namespace Cum
             return (i272 - m.focusPoint) * (m.cx - i) / i272 + i;
         }*/
 
-        static int MediumYs(int i, int i273)
-        {
-            if (i273 < 10)
-            {
+        static int MediumYs(int i, int i273) {
+            if(i273 < 10) {
                 i273 = 10;
             }
             return (i273 - Medium.FocusPoint) * (Medium.Cy - i) / i273 + i;
         }
 
-        public static int Getint(string astring, string string262, int i)
-        {
+        public static int Getint(string astring, string string262, int i) {
             var i263 = 0;
             var string264 = "";
-            for (var i265 = astring.Length + 1; i265 < string262.Length; i265++)
-            {
+            for(var i265 = astring.Length + 1; i265 < string262.Length; i265++) {
                 var string266 = string262[i265];
-                if (string266 == ',' || string266 == ')')
-                {
+                if(string266 == ',' || string266 == ')') {
                     i263++;
                     i265++;
                 }
-                if (i263 == i)
-                {
+                if(i263 == i) {
                     string264 = "" + string264 + string262[i265];
                 }
             }
@@ -178,13 +157,11 @@ namespace Cum
         private static readonly float Epsilon = 0.0000001F;
         private static readonly double EpsilonDouble = 0.0000001D;
 
-        static bool FEquals(float a, float b)
-        {
+        static bool FEquals(float a, float b) {
             return Math.Abs(a - b) < Epsilon;
         }
 
-        static bool DEquals(double a, double b)
-        {
+        static bool DEquals(double a, double b) {
             return Math.Abs(a - b) < EpsilonDouble;
         }
 
@@ -195,12 +172,9 @@ namespace Cum
          * @param targetValue The value to check for
          * @return {@code true} if the value ais found, {@code false} otherwise
          */
-        static bool ArrayContains(int[] arr, int targetValue)
-        {
-            foreach (var s in arr)
-            {
-                if (s == targetValue)
-                {
+        static bool ArrayContains(int[] arr, int targetValue) {
+            foreach(var s in arr) {
+                if(s == targetValue) {
                     return true;
                 }
             }
@@ -214,12 +188,9 @@ namespace Cum
          * @param targetValue The value to check for
          * @return {@code true} if the value ais found, {@code false} otherwise
          */
-        public static bool ArrayContains(byte[] arr, byte targetValue)
-        {
-            foreach (var s in arr)
-            {
-                if (s == targetValue)
-                {
+        public static bool ArrayContains(byte[] arr, byte targetValue) {
+            foreach(var s in arr) {
+                if(s == targetValue) {
                     return true;
                 }
             }
@@ -233,12 +204,9 @@ namespace Cum
          * @param targetValue The value to check for
          * @return {@code true} if the value ais found, {@code false} otherwise
          */
-        public static bool ArrayContains(short[] arr, short targetValue)
-        {
-            foreach (var s in arr)
-            {
-                if (s == targetValue)
-                {
+        public static bool ArrayContains(short[] arr, short targetValue) {
+            foreach(var s in arr) {
+                if(s == targetValue) {
                     return true;
                 }
             }
@@ -252,12 +220,9 @@ namespace Cum
          * @param targetValue The value to check for
          * @return {@code true} if the value ais found, {@code false} otherwise
          */
-        public static bool ArrayContains(char[] arr, char targetValue)
-        {
-            foreach (var s in arr)
-            {
-                if (s == targetValue)
-                {
+        public static bool ArrayContains(char[] arr, char targetValue) {
+            foreach(var s in arr) {
+                if(s == targetValue) {
                     return true;
                 }
             }
@@ -271,12 +236,9 @@ namespace Cum
          * @param targetValue The value to check for
          * @return {@code true} if the value ais found, {@code false} otherwise
          */
-        public static bool ArrayContains(long[] arr, long targetValue)
-        {
-            foreach (var s in arr)
-            {
-                if (s == targetValue)
-                {
+        public static bool ArrayContains(long[] arr, long targetValue) {
+            foreach(var s in arr) {
+                if(s == targetValue) {
                     return true;
                 }
             }
@@ -290,12 +252,9 @@ namespace Cum
          * @param targetValue The value to check for
          * @return {@code true} if the value ais found, {@code false} otherwise
          */
-        public static bool ArrayContains(float[] arr, float targetValue)
-        {
-            foreach (var s in arr)
-            {
-                if (s == targetValue)
-                {
+        public static bool ArrayContains(float[] arr, float targetValue) {
+            foreach(var s in arr) {
+                if(s == targetValue) {
                     return true;
                 }
             }
@@ -309,12 +268,9 @@ namespace Cum
          * @param targetValue The value to check for
          * @return {@code true} if the value ais found, {@code false} otherwise
          */
-        public static bool ArrayContains(double[] arr, double targetValue)
-        {
-            foreach (var s in arr)
-            {
-                if (s == targetValue)
-                {
+        public static bool ArrayContains(double[] arr, double targetValue) {
+            foreach(var s in arr) {
+                if(s == targetValue) {
                     return true;
                 }
             }
@@ -327,20 +283,16 @@ namespace Cum
          * @param str
          * @return
          */
-        public static bool IsNumeric(string str)
-        {
-            foreach (var c in str)
-            {
-                if (!char.IsDigit(c))
-                {
+        public static bool IsNumeric(string str) {
+            foreach(var c in str) {
+                if(!char.IsDigit(c)) {
                     return false;
                 }
             }
             return true;
         }
 
-        public static double GetDistance(int x1, int y1, int z1, int x2, int y2, int z2)
-        {
+        public static double GetDistance(int x1, int y1, int z1, int x2, int y2, int z2) {
             var dx = x1 - x2;
             var dy = y1 - y2;
             var dz = z1 - z2;
@@ -349,8 +301,7 @@ namespace Cum
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
 
-        public static double GetDistance(float x1, float y1, float z1, float x2, float y2, float z2)
-        {
+        public static double GetDistance(float x1, float y1, float z1, float x2, float y2, float z2) {
             var dx = x1 - x2;
             var dy = y1 - y2;
             var dz = z1 - z2;
@@ -359,31 +310,26 @@ namespace Cum
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
 
-        public static class ArrayUtilities
-        {
+        public static class ArrayUtilities {
             /**
              * Reverses an array of bytes.
              * @param data The array to reverse.
              */
-            public static void Reverse(byte[] data)
-            {
-                for (int left = 0, right = data.Length - 1; left < right; left++, right--)
-                {
+            public static void Reverse(byte[] data) {
+                for(int left = 0, right = data.Length - 1; left < right; left++, right--) {
                     // swap the values at the left and right indices
                     var temp = data[left];
                     data[left] = data[right];
                     data[right] = temp;
                 }
             }
-
+            
             /**
              * Reverses an array of elements.
              * @param data The array to reverse.
              */
-            public static void Reverse<T>(T[] data)
-            {
-                for (int left = 0, right = data.Length - 1; left < right; left++, right--)
-                {
+            public static void Reverse<T>(T[] data) {
+                for(int left = 0, right = data.Length - 1; left < right; left++, right--) {
                     // swap the values at the left and right indices
                     var temp = data[left];
                     data[left] = data[right];
@@ -392,9 +338,8 @@ namespace Cum
             }
         }
 
-        public static int PointDirection(int x, int y, int tX, int tY)
-        {
-            var angle = (int) (Math.Atan2(tY - y, tX - x) * 0.0174532925199433D);
+        public static int PointDirection(int x, int y, int tX, int tY) {
+            var angle = (int)(Math.Atan2(tY - y, tX - x) * 0.0174532925199433D);
 
             return angle < 0 ? angle + 360 : angle;
         }

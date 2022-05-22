@@ -1,18 +1,14 @@
 ﻿using System;
 
-namespace Cum
-{
-    public class Date
-    {
+namespace GameLogic {
+    public class Date {
         private readonly long _time;
 
-        public Date()
-        {
+        public Date() {
             _time = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         }
 
-        public long GetTime()
-        {
+        public long GetTime() {
             return _time;
         }
     }

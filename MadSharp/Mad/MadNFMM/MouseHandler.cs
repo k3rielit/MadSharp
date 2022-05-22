@@ -1,6 +1,4 @@
-namespace Cum
-{
-    class MouseHandler
-    {
+namespace GameLogic {
+    class MouseHandler {
     }
 }

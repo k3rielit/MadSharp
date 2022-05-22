@@ -1,15 +1,13 @@
 using System;
 
-namespace MiscUtil
-{
+namespace MiscUtil {
     /// <summary>
     /// Thread-safe equivalent of System.Random, using just static methods.
     /// If all you want is a source of random numbers, this is an easy class to
     /// use. If you need to specify your own seeds (eg for reproducible sequences
     /// of numbers), use System.Random.
     /// </summary>
-    public static class StaticRandom
-    {
+    public static class StaticRandom {
         static Random _random = new Random();
         static object _myLock = new object();
 
@@ -17,10 +15,8 @@ namespace MiscUtil
         /// Returns a nonnegative random number. 
         /// </summary>		
         /// <returns>A 32-bit signed integer greater than or equal to zero and less than Int32.MaxValue.</returns>
-        public static int Next()
-        {
-            lock (_myLock)
-            {
+        public static int Next() {
+            lock(_myLock) {
                 return _random.Next();
             }
         }
@@ -33,10 +29,8 @@ namespace MiscUtil
         /// that is, the range of return values includes zero but not maxValue.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">maxValue is less than zero.</exception>
-        public static int Next(int max)
-        {
-            lock (_myLock)
-            {
+        public static int Next(int max) {
+            lock(_myLock) {
                 return _random.Next(max);
             }
         }
@@ -55,10 +49,8 @@ namespace MiscUtil
         /// If minValue equals maxValue, minValue is returned.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">minValue is greater than maxValue.</exception>
-        public static int Next(int min, int max)
-        {
-            lock (_myLock)
-            {
+        public static int Next(int min, int max) {
+            lock(_myLock) {
                 return _random.Next(min, max);
             }
         }
@@ -67,10 +59,8 @@ namespace MiscUtil
         /// Returns a random number between 0.0 and 1.0.
         /// </summary>
         /// <returns>A double-precision floating point number greater than or equal to 0.0, and less than 1.0.</returns>
-        public static double NextDouble()
-        {
-            lock (_myLock)
-            {
+        public static double NextDouble() {
+            lock(_myLock) {
                 return _random.NextDouble();
             }
         }
@@ -80,10 +70,8 @@ namespace MiscUtil
         /// </summary>
         /// <param name="buffer">An array of bytes to contain random numbers.</param>
         /// <exception cref="ArgumentNullException">buffer is a null reference (Nothing in Visual Basic).</exception>
-        public static void NextBytes(byte[] buffer)
-        {
-            lock (_myLock)
-            {
+        public static void NextBytes(byte[] buffer) {
+            lock(_myLock) {
                 _random.NextBytes(buffer);
             }
         }

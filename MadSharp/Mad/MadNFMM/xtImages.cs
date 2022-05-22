@@ -1,13 +1,10 @@
-﻿using static Cum.XTImages.Images;
-using static Cum.XTGraphics;
-using static Cum.XTPart2;
+﻿using static GameLogic.XTImages.Images;
+using static GameLogic.XTGraphics;
+using static GameLogic.XTPart2;
 
-namespace Cum
-{
-    public class XTImages
-    {
-        internal static class Images
-        {
+namespace GameLogic {
+    public class XTImages {
+        internal static class Images {
             internal static Image Arn;
             internal static Image Arrows;
             internal static Image Asd;
@@ -146,13 +143,11 @@ namespace Cum
 
         internal delegate void Accept(byte[] ais);
 
-        internal struct ImageIdentifier
-        {
+        internal struct ImageIdentifier {
             internal readonly string FileName;
             internal readonly Accept Cons;
 
-            internal ImageIdentifier(string s, Accept c)
-            {
+            internal ImageIdentifier(string s, Accept c) {
                 Cons = c;
                 FileName = s;
             }
@@ -160,23 +155,20 @@ namespace Cum
 
         private static Image _cbg1, _cbg2;
 
-        internal static readonly ImageIdentifier[] Idts =
-        {
+        internal static readonly ImageIdentifier[] Idts = {
             new ImageIdentifier("cars.png", ais => { Carsbg = LoadBimage(ais, 1); }),
-            new ImageIdentifier("color.png", ais =>
-            {
+            new ImageIdentifier("color.png", ais => {
                 _cbg1 = LoadBimage(ais, 0);
-
-                if (_cbg1 != null && _cbg2 != null)
-{                    Makecarsbgc(_cbg1, _cbg2);
-}            }),
-            new ImageIdentifier("class.png", ais =>
-            {
+                if (_cbg1 != null && _cbg2 != null) {
+                    Makecarsbgc(_cbg1, _cbg2);
+                }
+            }),
+            new ImageIdentifier("class.png", ais => {
                 _cbg2 = LoadBimage(ais, 0);
-
-                if (_cbg1 != null && _cbg2 != null)
-{                    Makecarsbgc(_cbg1, _cbg2);
-}            }),
+                if (_cbg1 != null && _cbg2 != null) {
+                    Makecarsbgc(_cbg1, _cbg2);
+                }
+            }),
             new ImageIdentifier("smokey.png", ais => { Smokeypix(ais); }),
             new ImageIdentifier("1.png", ais => { Orank[0] = Loadimage(ais); }),
             new ImageIdentifier("gameh.png", ais => { Ogameh = Loadimage(ais); }),
@@ -209,25 +201,21 @@ namespace Cum
             new ImageIdentifier("br.png", ais => { Br = Loadimage(ais); }),
             new ImageIdentifier("loadingmusic.png", ais => { Oloadingmusic = Loadimage(ais); }),
             new ImageIdentifier("radicalplay.png", ais => { Radicalplay = Loadimage(ais); }),
-            new ImageIdentifier("back.png", ais =>
-            {
+            new ImageIdentifier("back.png", ais => {
                 Back[0] = Loadimage(ais);
                 Back[1] = Bressed(Back[0]);
             }),
-            new ImageIdentifier("continue.png", ais =>
-            {
+            new ImageIdentifier("continue.png", ais => {
                 Contin[0] = Loadimage(ais);
                 Contin[1] = Bressed(Contin[0]);
             }),
-            new ImageIdentifier("next.png", ais =>
-            {
+            new ImageIdentifier("next.png", ais => {
                 Next[0] = Loadimage(ais);
                 Next[1] = Bressed(Next[0]);
             }),
             new ImageIdentifier("rpro.png", ais => { Rpro = Loadimage(ais); }),
             new ImageIdentifier("selectcar.png", ais => { Selectcar = Loadimage(ais); }),
-            new ImageIdentifier("track.jpg", ais =>
-            {
+            new ImageIdentifier("track.jpg", ais => {
                 Trackbg[0] = LoadBimage(ais, 3);
                 Trackbg[1] = Dodgen(Trackbg[0]);
             }),
@@ -240,8 +228,7 @@ namespace Cum
             new ImageIdentifier("speed.png", ais => { Osped = Loadimage(ais); }),
             new ImageIdentifier("wasted.png", ais => { Owas = Loadimage(ais); }),
             new ImageIdentifier("start1.png", ais => { Ostar[0] = Loadimage(ais); }),
-            new ImageIdentifier("start2.png", ais =>
-            {
+            new ImageIdentifier("start2.png", ais => {
                 Ostar[1] = Loadimage(ais);
                 Star[2] = Pressed(Ostar[1]);
             }),

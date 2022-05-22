@@ -2,10 +2,8 @@ using System;
 using System.Text;
 using boolean = System.Boolean;
 
-namespace Cum
-{
-    class CarDefine
-    {
+namespace GameLogic {
+    class CarDefine {
         public static readonly int ThirtySix = 36; // MAX CUSTOM CARS - NCARS
         public static readonly int Sixteen = 16; // NCARS
         public static readonly int FiftySix = 56; // NCARS + MAX CUSTOM CARS
@@ -564,19 +562,16 @@ namespace Cum
         private static CarDefine _thread;
         internal static readonly int[] Top20Adds = new int[20];
 
-        private CarDefine()
-        {
+        private CarDefine() {
         }
 
-        internal static CarDefine Create(ContO[] contos)
-        {
+        internal static CarDefine Create(ContO[] contos) {
             _thread = new CarDefine();
             _bco = contos;
             return _thread;
         }
 
-        private static void Loadstat(byte[] _is, string str, int i, int i0, int i1, int i2)
-        {
+        private static void Loadstat(byte[] _is, string str, int i, int i0, int i1, int i2) {
             Names[i2] = str;
             var abool = false;
             var bool3 = false;
@@ -597,524 +592,417 @@ namespace Cum
             var f = 0.0F;
             Publish[i2 - Sixteen] = 0;
             Createdby[i2 - Sixteen] = "Unkown User";
-            try
-            {
-                foreach (var aline in Encoding.Default.GetString(_is).Split('\n'))
-                {
+            try {
+                foreach(var aline in Encoding.Default.GetString(_is).Split('\n')) {
                     var line = aline.Trim();
-                    if (line.StartsWith("stat("))
-                    {
-                        try
-                        {
+                    if(line.StartsWith("stat(")) {
+                        try {
                             i6 = 0;
-                            for (var i9 = 0; i9 < 5; i9++)
-                            {
+                            for(var i9 = 0; i9 < 5; i9++) {
                                 statValues[i9] = Getvalue("stat", line, i9);
-                                if (statValues[i9] > 200)
-                                {
+                                if(statValues[i9] > 200) {
                                     statValues[i9] = 200;
                                 }
-                                if (statValues[i9] < 16)
-                                {
+                                if(statValues[i9] < 16) {
                                     statValues[i9] = 16;
                                 }
                                 i6 += statValues[i9];
                             }
                             abool = true;
                         }
-                        catch (Exception exception)
-                        {
+                        catch(Exception exception) {
                             abool = false;
                         }
                     }
-                    if (line.StartsWith("physics("))
-                    {
-                        try
-                        {
-                            for (var i10 = 0; i10 < 11; i10++)
-                            {
+                    if(line.StartsWith("physics(")) {
+                        try {
+                            for(var i10 = 0; i10 < 11; i10++) {
                                 physicsValues[i10] = Getvalue("physics", line, i10);
-                                if (physicsValues[i10] > 100)
-                                {
+                                if(physicsValues[i10] > 100) {
                                     physicsValues[i10] = 100;
                                 }
-                                if (physicsValues[i10] < 0)
-                                {
+                                if(physicsValues[i10] < 0) {
                                     physicsValues[i10] = 0;
                                 }
                             }
-                            for (var i11 = 0; i11 < 3; i11++)
-                            {
+                            for(var i11 = 0; i11 < 3; i11++) {
                                 is8[i11] = Getvalue("physics", line, i11 + 11);
-                                if (i11 != 0 && is8[i11] > 100)
-                                {
+                                if(i11 != 0 && is8[i11] > 100) {
                                     is8[i11] = 100;
                                 }
-                                if (is8[i11] < 0)
-                                {
+                                if(is8[i11] < 0) {
                                     is8[i11] = 0;
                                 }
                             }
                             Enginsignature[i2] = Getvalue("physics", line, 14);
-                            if (Enginsignature[i2] > 4)
-                            {
+                            if(Enginsignature[i2] > 4) {
                                 Enginsignature[i2] = 0;
                             }
-                            if (Enginsignature[i2] < 0)
-                            {
+                            if(Enginsignature[i2] < 0) {
                                 Enginsignature[i2] = 0;
                             }
                             f = Getvalue("physics", line, 15);
-                            if (f > 0.0F)
-                            {
+                            if(f > 0.0F) {
                                 bool3 = true;
                             }
                         }
-                        catch (Exception exception)
-                        {
+                        catch(Exception exception) {
                             bool3 = false;
                         }
                     }
-                    if (line.StartsWith("handling("))
-                    {
-                        try
-                        {
+                    if(line.StartsWith("handling(")) {
+                        try {
                             var i12 = Getvalue("handling", line, 0);
-                            if (i12 > 200)
-                            {
+                            if(i12 > 200) {
                                 i12 = 200;
                             }
-                            if (i12 < 50)
-                            {
+                            if(i12 < 50) {
                                 i12 = 50;
                             }
                             Dishandle[i2] = i12 / 200.0F;
                         }
-                        catch (Exception ignored)
-                        {
+                        catch(Exception ignored) {
                             Console.WriteLine(ignored);
                         }
                     }
-                    if (line.StartsWith("carmaker("))
-                    {
+                    if(line.StartsWith("carmaker(")) {
                         Createdby[i2 - Sixteen] = GetSvalue("carmaker", line, 0);
                     }
-                    if (line.StartsWith("publish("))
-                    {
+                    if(line.StartsWith("publish(")) {
                         Publish[i2 - Sixteen] = Getvalue("publish", line, 0);
                     }
                 }
             }
-            catch (Exception exception)
-            {
+            catch(Exception exception) {
                 Console.WriteLine("Error Loading Car Stat: " + exception);
             }
-            if (abool && bool3)
-            {
+            if(abool && bool3) {
                 var i13 = 0;
-                if (i6 > 680)
-                {
+                if(i6 > 680) {
                     i13 = 680 - i6;
                 }
-                if (i6 > 640 && i6 < 680)
-                {
+                if(i6 > 640 && i6 < 680) {
                     i13 = 640 - i6;
                 }
-                if (i6 > 600 && i6 < 640)
-                {
+                if(i6 > 600 && i6 < 640) {
                     i13 = 600 - i6;
                 }
-                if (i6 > 560 && i6 < 600)
-                {
+                if(i6 > 560 && i6 < 600) {
                     i13 = 560 - i6;
                 }
-                if (i6 > 520 && i6 < 560)
-                {
+                if(i6 > 520 && i6 < 560) {
                     i13 = 520 - i6;
                 }
-                if (i6 < 520)
-                {
+                if(i6 < 520) {
                     i13 = 520 - i6;
                 }
-                while (i13 != 0)
-                {
-                    for (var i14 = 0; i14 < 5; i14++)
-                    {
-                        if (i13 > 0 && statValues[i14] < 200)
-                        {
+                while(i13 != 0) {
+                    for(var i14 = 0; i14 < 5; i14++) {
+                        if(i13 > 0 && statValues[i14] < 200) {
                             statValues[i14]++;
                             i13--;
                         }
-                        if (i13 < 0 && statValues[i14] > 16)
-                        {
+                        if(i13 < 0 && statValues[i14] > 16) {
                             statValues[i14]--;
                             i13++;
                         }
                     }
                 }
                 i6 = 0;
-                for (var i15 = 0; i15 < 5; i15++)
-                {
+                for(var i15 = 0; i15 < 5; i15++) {
                     i6 += statValues[i15];
                 }
-                if (i6 == 520)
-                {
+                if(i6 == 520) {
                     Cclass[i2] = 0;
                 }
-                if (i6 == 560)
-                {
+                if(i6 == 560) {
                     Cclass[i2] = 1;
                 }
-                if (i6 == 600)
-                {
+                if(i6 == 600) {
                     Cclass[i2] = 2;
                 }
-                if (i6 == 640)
-                {
+                if(i6 == 640) {
                     Cclass[i2] = 3;
                 }
-                if (i6 == 680)
-                {
+                if(i6 == 680) {
                     Cclass[i2] = 4;
                 }
                 var i16 = 0;
                 var i17 = 0;
                 var f18 = 0.5F;
-                if (statValues[0] == 200)
-                {
+                if(statValues[0] == 200) {
                     i16 = 1;
                     i17 = 1;
                 }
-                if (statValues[0] > 192 && statValues[0] < 200)
-                {
+                if(statValues[0] > 192 && statValues[0] < 200) {
                     i16 = 12;
                     i17 = 1;
                     f18 = (statValues[0] - 192) / 8.0F;
                 }
-                if (statValues[0] == 192)
-                {
+                if(statValues[0] == 192) {
                     i16 = 12;
                     i17 = 12;
                 }
-                if (statValues[0] > 148 && statValues[0] < 192)
-                {
+                if(statValues[0] > 148 && statValues[0] < 192) {
                     i16 = 14;
                     i17 = 12;
                     f18 = (statValues[0] - 148) / 44.0F;
                 }
-                if (statValues[0] == 148)
-                {
+                if(statValues[0] == 148) {
                     i16 = 14;
                     i17 = 14;
                 }
-                if (statValues[0] > 133 && statValues[0] < 148)
-                {
+                if(statValues[0] > 133 && statValues[0] < 148) {
                     i16 = 10;
                     i17 = 14;
                     f18 = (statValues[0] - 133) / 15.0F;
                 }
-                if (statValues[0] == 133)
-                {
+                if(statValues[0] == 133) {
                     i16 = 10;
                     i17 = 10;
                 }
-                if (statValues[0] > 112 && statValues[0] < 133)
-                {
+                if(statValues[0] > 112 && statValues[0] < 133) {
                     i16 = 15;
                     i17 = 10;
                     f18 = (statValues[0] - 112) / 21.0F;
                 }
-                if (statValues[0] == 112)
-                {
+                if(statValues[0] == 112) {
                     i16 = 15;
                     i17 = 15;
                 }
-                if (statValues[0] > 107 && statValues[0] < 112)
-                {
+                if(statValues[0] > 107 && statValues[0] < 112) {
                     i16 = 11;
                     i17 = 15;
                     f18 = (statValues[0] - 107) / 5.0F;
                 }
-                if (statValues[0] == 107)
-                {
+                if(statValues[0] == 107) {
                     i16 = 11;
                     i17 = 11;
                 }
-                if (statValues[0] > 88 && statValues[0] < 107)
-                {
+                if(statValues[0] > 88 && statValues[0] < 107) {
                     i16 = 13;
                     i17 = 11;
                     f18 = (statValues[0] - 88) / 19.0F;
                 }
-                if (statValues[0] == 88)
-                {
+                if(statValues[0] == 88) {
                     i16 = 13;
                     i17 = 13;
                 }
-                if (statValues[0] > 88)
-                {
-                    Swits[i2, 0] = (int) ((Swits[i17, 0] - Swits[i16, 0]) * f18 + Swits[i16, 0]);
-                    Swits[i2, 1] = (int) ((Swits[i17, 1] - Swits[i16, 1]) * f18 + Swits[i16, 1]);
-                    Swits[i2, 2] = (int) ((Swits[i17, 2] - Swits[i16, 2]) * f18 + Swits[i16, 2]);
+                if(statValues[0] > 88) {
+                    Swits[i2, 0] = (int)((Swits[i17, 0] - Swits[i16, 0]) * f18 + Swits[i16, 0]);
+                    Swits[i2, 1] = (int)((Swits[i17, 1] - Swits[i16, 1]) * f18 + Swits[i16, 1]);
+                    Swits[i2, 2] = (int)((Swits[i17, 2] - Swits[i16, 2]) * f18 + Swits[i16, 2]);
                 }
-                else
-                {
+                else {
                     f18 = statValues[0] / 88.0F;
-                    if (f18 < 0.76)
-                    {
+                    if(f18 < 0.76) {
                         f18 = 0.76F;
                     }
-                    Swits[i2, 0] = (int) (50.0F * f18);
-                    Swits[i2, 1] = (int) (130.0F * f18);
-                    Swits[i2, 2] = (int) (210.0F * f18);
+                    Swits[i2, 0] = (int)(50.0F * f18);
+                    Swits[i2, 1] = (int)(130.0F * f18);
+                    Swits[i2, 2] = (int)(210.0F * f18);
                 }
                 i16 = 0;
                 i17 = 0;
                 f18 = 0.5F;
-                if (statValues[1] == 200)
-                {
+                if(statValues[1] == 200) {
                     i16 = 1;
                     i17 = 1;
                 }
-                if (statValues[1] > 150 && statValues[1] < 200)
-                {
+                if(statValues[1] > 150 && statValues[1] < 200) {
                     i16 = 14;
                     i17 = 1;
                     f18 = (statValues[1] - 150) / 50.0F;
                 }
-                if (statValues[1] == 150)
-                {
+                if(statValues[1] == 150) {
                     i16 = 14;
                     i17 = 14;
                 }
-                if (statValues[1] > 144 && statValues[1] < 150)
-                {
+                if(statValues[1] > 144 && statValues[1] < 150) {
                     i16 = 9;
                     i17 = 14;
                     f18 = (statValues[1] - 144) / 6.0F;
                 }
-                if (statValues[1] == 144)
-                {
+                if(statValues[1] == 144) {
                     i16 = 9;
                     i17 = 9;
                 }
-                if (statValues[1] > 139 && statValues[1] < 144)
-                {
+                if(statValues[1] > 139 && statValues[1] < 144) {
                     i16 = 6;
                     i17 = 9;
                     f18 = (statValues[1] - 139) / 5.0F;
                 }
-                if (statValues[1] == 139)
-                {
+                if(statValues[1] == 139) {
                     i16 = 6;
                     i17 = 6;
                 }
-                if (statValues[1] > 128 && statValues[1] < 139)
-                {
+                if(statValues[1] > 128 && statValues[1] < 139) {
                     i16 = 15;
                     i17 = 6;
                     f18 = (statValues[1] - 128) / 11.0F;
                 }
-                if (statValues[1] == 128)
-                {
+                if(statValues[1] == 128) {
                     i16 = 15;
                     i17 = 15;
                 }
-                if (statValues[1] > 122 && statValues[1] < 128)
-                {
+                if(statValues[1] > 122 && statValues[1] < 128) {
                     i16 = 10;
                     i17 = 15;
                     f18 = (statValues[1] - 122) / 6.0F;
                 }
-                if (statValues[1] == 122)
-                {
+                if(statValues[1] == 122) {
                     i16 = 10;
                     i17 = 10;
                 }
-                if (statValues[1] > 119 && statValues[1] < 122)
-                {
+                if(statValues[1] > 119 && statValues[1] < 122) {
                     i16 = 3;
                     i17 = 10;
                     f18 = (statValues[1] - 119) / 3.0F;
                 }
-                if (statValues[1] == 119)
-                {
+                if(statValues[1] == 119) {
                     i16 = 3;
                     i17 = 3;
                 }
-                if (statValues[1] > 98 && statValues[1] < 119)
-                {
+                if(statValues[1] > 98 && statValues[1] < 119) {
                     i16 = 5;
                     i17 = 3;
                     f18 = (statValues[1] - 98) / 21.0F;
                 }
-                if (statValues[1] == 98)
-                {
+                if(statValues[1] == 98) {
                     i16 = 5;
                     i17 = 5;
                 }
-                if (statValues[1] > 81 && statValues[1] < 98)
-                {
+                if(statValues[1] > 81 && statValues[1] < 98) {
                     i16 = 0;
                     i17 = 5;
                     f18 = (statValues[1] - 81) / 17.0F;
                 }
-                if (statValues[1] == 81)
-                {
+                if(statValues[1] == 81) {
                     i16 = 0;
                     i17 = 0;
                 }
-                if (statValues[1] <= 80)
-                {
+                if(statValues[1] <= 80) {
                     i16 = 2;
                     i17 = 2;
                 }
-                if (statValues[0] <= 88)
-                {
+                if(statValues[0] <= 88) {
                     i16 = 13;
                     i17 = 13;
                 }
                 Acelf[i2, 0] = (Acelf[i17, 0] - Acelf[i16, 0]) * f18 + Acelf[i16, 0];
                 Acelf[i2, 1] = (Acelf[i17, 1] - Acelf[i16, 1]) * f18 + Acelf[i16, 1];
                 Acelf[i2, 2] = (Acelf[i17, 2] - Acelf[i16, 2]) * f18 + Acelf[i16, 2];
-                if (statValues[1] <= 70 && statValues[0] > 88)
-                {
+                if(statValues[1] <= 70 && statValues[0] > 88) {
                     Acelf[i2, 0] = 9.0F;
                     Acelf[i2, 1] = 4.0F;
                     Acelf[i2, 2] = 3.0F;
                 }
                 f18 = (statValues[2] - 88) / 109.0F;
-                if (f18 > 1.0F)
-                {
+                if(f18 > 1.0F) {
                     f18 = 1.0F;
                 }
-                if (f18 < -0.55)
-                {
+                if(f18 < -0.55) {
                     f18 = -0.55F;
                 }
                 Airs[i2] = 0.55F + 0.45F * f18 + 0.4F * (physicsValues[9] / 100.0F);
-                if (Airs[i2] < 0.3)
-                {
+                if(Airs[i2] < 0.3) {
                     Airs[i2] = 0.3F;
                 }
-                Airc[i2] = (int) (10.0F + 70.0F * f18 + 30.0F * (physicsValues[10] / 100.0F));
-                if (Airc[i2] < 0)
-                {
+                Airc[i2] = (int)(10.0F + 70.0F * f18 + 30.0F * (physicsValues[10] / 100.0F));
+                if(Airc[i2] < 0) {
                     Airc[i2] = 0;
                 }
-                var i19 = (int) (670.0F - (physicsValues[9] + physicsValues[10]) / 200.0F * 420.0F);
-                if (statValues[0] <= 88)
-                {
-                    i19 = (int) (1670.0F - (physicsValues[9] + physicsValues[10]) / 200.0F * 1420.0F);
+                var i19 = (int)(670.0F - (physicsValues[9] + physicsValues[10]) / 200.0F * 420.0F);
+                if(statValues[0] <= 88) {
+                    i19 = (int)(1670.0F - (physicsValues[9] + physicsValues[10]) / 200.0F * 1420.0F);
                 }
-                if (statValues[2] > 190 && i19 < 300)
-                {
+                if(statValues[2] > 190 && i19 < 300) {
                     i19 = 300;
                 }
                 Powerloss[i2] = i19 * 10000;
                 Moment[i2] = 0.7F + (statValues[3] - 16) / 184.0F * 1.0F;
-                if (statValues[0] < 110)
-                {
+                if(statValues[0] < 110) {
                     Moment[i2] = 0.75F + (statValues[3] - 16) / 184.0F * 1.25F;
                 }
-                if (statValues[3] == 200 && statValues[4] == 200 && statValues[0] <= 88)
-                {
+                if(statValues[3] == 200 && statValues[4] == 200 && statValues[0] <= 88) {
                     Moment[i2] = 3.0F;
                 }
                 var f20 = 0.9F + (statValues[4] - 90) * 0.01F;
-                if (f20 < 0.6)
-                {
+                if(f20 < 0.6) {
                     f20 = 0.6F;
                 }
-                if (statValues[4] == 200 && statValues[0] <= 88)
-                {
+                if(statValues[4] == 200 && statValues[0] <= 88) {
                     f20 = 3.0F;
                 }
-                Maxmag[i2] = (int) (f * f20);
+                Maxmag[i2] = (int)(f * f20);
                 Outdam[i2] = 0.35F + (f20 - 0.6F) * 0.5F;
-                if (Outdam[i2] < 0.35)
-                {
+                if(Outdam[i2] < 0.35) {
                     Outdam[i2] = 0.35F;
                 }
-                if (Outdam[i2] > 1.0F)
-                {
+                if(Outdam[i2] > 1.0F) {
                     Outdam[i2] = 1.0F;
                 }
-                Clrad[i2] = (int) (is8[0] * is8[0] * 1.5);
-                if (Clrad[i2] < 1000)
-                {
+                Clrad[i2] = (int)(is8[0] * is8[0] * 1.5);
+                if(Clrad[i2] < 1000) {
                     Clrad[i2] = 1000;
                 }
                 Dammult[i2] = 0.3F + is8[1] * 0.005F;
-                Msquash[i2] = (int) (2.0 + is8[2] / 7.6);
+                Msquash[i2] = (int)(2.0 + is8[2] / 7.6);
                 Flipy[i2] = i0;
-                Handb[i2] = (int) (7.0F + physicsValues[0] / 100.0F * 8.0F);
-                Turn[i2] = (int) (4.0F + physicsValues[1] / 100.0F * 6.0F);
+                Handb[i2] = (int)(7.0F + physicsValues[0] / 100.0F * 8.0F);
+                Turn[i2] = (int)(4.0F + physicsValues[1] / 100.0F * 6.0F);
                 Grip[i2] = 16.0F + physicsValues[2] / 100.0F * 14.0F;
-                if (Grip[i2] < 21.0F)
-                {
-                    Swits[i2, 0] += (int) (40.0F * ((21.0F - Grip[i2]) / 5.0F));
-                    if (Swits[i2, 0] > 100)
-                    {
+                if(Grip[i2] < 21.0F) {
+                    Swits[i2, 0] += (int)(40.0F * ((21.0F - Grip[i2]) / 5.0F));
+                    if(Swits[i2, 0] > 100) {
                         Swits[i2, 0] = 100;
                     }
                 }
                 Bounce[i2] = 0.8F + physicsValues[3] / 100.0F * 0.6F;
-                if (physicsValues[3] > 67)
-                {
+                if(physicsValues[3] > 67) {
                     Airs[i2] *= 0.76F + (1.0F - physicsValues[3] / 100.0F) * 0.24F;
-                    Airc[i2] = (int) (Airc[i2] * 0.76F + (1.0F - physicsValues[3] / 100.0F) * 0.24F);
+                    Airc[i2] = (int)(Airc[i2] * 0.76F + (1.0F - physicsValues[3] / 100.0F) * 0.24F);
                 }
-                Lift[i2] = (int) (physicsValues[5] * (float) physicsValues[5] / 10000.0F * 30.0F);
-                Revlift[i2] = (int) (physicsValues[6] / 100.0F * 32.0F);
-                Push[i2] = (int) (2.0F + physicsValues[7] / 100.0F * 2.0F * ((30 - Lift[i2]) / 30f));
-                Revpush[i2] = (int) (1.0F + physicsValues[8] / 100.0F * 2.0F);
+                Lift[i2] = (int)(physicsValues[5] * (float)physicsValues[5] / 10000.0F * 30.0F);
+                Revlift[i2] = (int)(physicsValues[6] / 100.0F * 32.0F);
+                Push[i2] = (int)(2.0F + physicsValues[7] / 100.0F * 2.0F * ((30 - Lift[i2]) / 30f));
+                Revpush[i2] = (int)(1.0F + physicsValues[8] / 100.0F * 2.0F);
                 Comprad[i2] = i / 400.0F + (statValues[3] - 16) / 184.0F * 0.2F;
-                if (Comprad[i2] < 0.4)
-                {
+                if(Comprad[i2] < 0.4) {
                     Comprad[i2] = 0.4F;
                 }
                 Simag[i2] = (i1 - 17) * 0.0167F + 0.85F;
             }
-            else
-            {
+            else {
                 Names[i2] = "";
             }
         }
 
-        private static int Getvalue(string str, string string21, int i)
-        {
+        private static int Getvalue(string str, string string21, int i) {
             var i22 = 0;
             var string23 = "";
-            for (var i24 = str.Length + 1; i24 < string21.Length; i24++)
-            {
+            for(var i24 = str.Length + 1; i24 < string21.Length; i24++) {
                 var string25 = $"{string21[i24]}";
-                if (string25.Equals(",") || string25.Equals(")"))
-                {
+                if(string25.Equals(",") || string25.Equals(")")) {
                     i22++;
                     i24++;
                 }
-                if (i22 == i)
-                {
+                if(i22 == i) {
                     string23 = "" + string23 + string21[i24];
                 }
             }
-            return (int) float.Parse(string23);
+            return (int)float.Parse(string23);
         }
 
-        private static string GetSvalue(string str, string string26, int i)
-        {
+        private static string GetSvalue(string str, string string26, int i) {
             var string27 = "";
             var i28 = 0;
-            for (var i29 = str.Length + 1; i29 < string26.Length && i28 <= i; i29++)
-            {
+            for(var i29 = str.Length + 1; i29 < string26.Length && i28 <= i; i29++) {
                 var string30 = $"{string26[i29]}";
-                if (string30.Equals(",") || string30.Equals(")"))
-                {
+                if(string30.Equals(",") || string30.Equals(")")) {
                     i28++;
                 }
-                else if (i28 == i)
-                {
+                else if(i28 == i) {
                     string27 = "" + string27 + string30;
                 }
             }

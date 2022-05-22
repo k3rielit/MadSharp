@@ -1,14 +1,11 @@
 ﻿using TextRenderer = System.Windows.Forms.TextRenderer;
 
-namespace Cum
-{
-    internal struct DistHolder
-    {
+namespace GameLogic {
+    internal struct DistHolder {
         public int Id;
         public int Dist;
 
-        public DistHolder(int id, int dist)
-        {
+        public DistHolder(int id, int dist) {
             Dist = dist;
             Id = id;
         }

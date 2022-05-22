@@ -3,75 +3,61 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using ManagedBass;
 
-namespace Cum
-{
-    internal class SoundClip
-    {
+namespace GameLogic {
+    internal class SoundClip {
         public static ContO Source;
         public static ContO Player;
         private readonly int _chan;
 
         private static List<SoundClip> SoundPool { get; set; } = new List<SoundClip>();
 
-        public SoundClip(string s)
-        {
+        public SoundClip(string s) {
             const bool isLooping = false;
-            if ((_chan = Bass.CreateStream(s, 0, 0, isLooping ? BassFlags.Loop : BassFlags.Default)) == 0)
-            {
+            if((_chan = Bass.CreateStream(s, 0, 0, isLooping ? BassFlags.Loop : BassFlags.Default)) == 0) {
                 // it ain't playable
                 throw new Exception(GetBassError(Bass.LastError));
             }
             SoundPool.Add(this);
         }
 
-        public void Play()
-        {
-            if (Bass.ChannelIsActive(_chan) == PlaybackState.Playing) return;
+        public void Play() {
+            if(Bass.ChannelIsActive(_chan) == PlaybackState.Playing) return;
             Bass.ChannelRemoveFlag(_chan, BassFlags.Loop);
             Bass.ChannelPlay(_chan);//TODO see restart parameter
         }
 
-        public void Checkopen()
-        {
+        public void Checkopen() {
         }
 
-        public void Loop()
-        {
-            if (Bass.ChannelIsActive(_chan) == PlaybackState.Playing) return;
+        public void Loop() {
+            if(Bass.ChannelIsActive(_chan) == PlaybackState.Playing) return;
             Bass.ChannelAddFlag(_chan, BassFlags.Loop);
             Bass.ChannelPlay(_chan);//TODO see restart parameter
         }
 
-        public void Stop()
-        {
-            if (Bass.ChannelIsActive(_chan) != PlaybackState.Playing) return;
+        public void Stop() {
+            if(Bass.ChannelIsActive(_chan) != PlaybackState.Playing) return;
             Bass.ChannelStop(_chan);
         }
 
-        public static void StopAll()
-        {
-            foreach (var s in SoundPool)
-            {
+        public static void StopAll() {
+            foreach(var s in SoundPool) {
                 s.Stop();
             }
         }
-        
-        public static void SetAllVolumes(float vol)
-        {
-            foreach (var s in SoundPool)
-            {
+
+        public static void SetAllVolumes(float vol) {
+            foreach(var s in SoundPool) {
                 Bass.ChannelSetAttribute(s._chan, ChannelAttribute.Volume, vol);
             }
         }
-        
-        public static string GetBassError(Errors error)
-        {
-            var errCode = (int) error;
+
+        public static string GetBassError(Errors error) {
+            var errCode = (int)error;
             string errStr;
             string errDesc;
 
-            switch (errCode)
-            {
+            switch(errCode) {
                 case 0:
                     errStr = "BASS_OK";
                     errDesc = "All is OK";

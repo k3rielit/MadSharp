@@ -1,16 +1,12 @@
-﻿namespace Cum
-{
-    internal struct File
-    {
+﻿namespace GameLogic {
+    internal struct File {
         internal string Path;
 
-        public File(string str)
-        {
+        public File(string str) {
             Path = str;
         }
 
-        public File(File parent, string child)
-        {
+        public File(File parent, string child) {
             Path = $@"{parent.Path}\{child}";
         }
 

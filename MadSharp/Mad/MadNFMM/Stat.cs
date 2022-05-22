@@ -1,7 +1,5 @@
-namespace Cum
-{
-    public class Stat
-    {
+namespace GameLogic {
+    public class Stat {
         internal readonly int[] Swits;
         internal readonly float[] Acelf;
         internal readonly int Handb;
@@ -62,8 +60,7 @@ namespace Cum
             outdam,
             cclass,
             names,
-            enginsignature)
-        {
+            enginsignature) {
             Include = include;
             Createdby = createdby;
             Publish = publish;
@@ -72,8 +69,7 @@ namespace Cum
         public Stat(int[] swits, float[] acelf, int handb, float airs, int airc, int turn, float grip, float bounce,
             float simag, float moment, float comprad, int push, int revpush, int lift, int revlift, int powerloss,
             int flipy, int msquash, int clrad, float dammult, int maxmag, float dishandle, float outdam, int cclass,
-            string names, int enginsignature)
-        {
+            string names, int enginsignature) {
             Swits = swits.CloneArray();
             Acelf = acelf.CloneArray();
 
@@ -103,8 +99,7 @@ namespace Cum
             Enginsignature = enginsignature;
         }
 
-        public Stat(Stat clone)
-        {
+        public Stat(Stat clone) {
             Swits = clone.Swits.CloneArray();
             Acelf = clone.Acelf.CloneArray();
 
@@ -134,11 +129,9 @@ namespace Cum
             Enginsignature = clone.Enginsignature;
         }
 
-        public Stat(int cn)
-        {
+        public Stat(int cn) {
             Swits = CarDefine.Swits.Slice(cn);
             Acelf = CarDefine.Acelf.Slice(cn);
-
             Handb = CarDefine.Handb[cn];
             Airs = CarDefine.Airs[cn];
             Airc = CarDefine.Airc[cn];
@@ -164,8 +157,7 @@ namespace Cum
             Names = CarDefine.Names[cn];
             Enginsignature = CarDefine.Enginsignature[cn];
 
-            if (cn >= CarDefine.Sixteen)
-            {
+            if(cn >= CarDefine.Sixteen) {
                 Include = CarDefine.Include[cn];
                 Createdby = CarDefine.Createdby[cn];
                 Publish = CarDefine.Publish[cn];

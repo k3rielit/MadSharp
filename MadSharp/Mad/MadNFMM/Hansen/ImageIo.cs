@@ -2,17 +2,13 @@
 using MadGame;
 using SharpDXMad;
 
-namespace Cum
-{
-    internal static class ImageIo
-    {
-        public static Image Read(File file)
-        {
+namespace GameLogic {
+    internal static class ImageIo {
+        public static Image Read(File file) {
             return new Image(G.D2D, Images.LoadFromFile(G.D2D, file.Path));
         }
 
-        public static void GrabPixels(Image image, int[] flexpix)
-        {
+        public static void GrabPixels(Image image, int[] flexpix) {
             throw new NotImplementedException();
             /*
             
@@ -24,8 +20,7 @@ namespace Cum
                 }*/
         }
 
-        public static Image Read(byte[] file)
-        {
+        public static Image Read(byte[] file) {
             return new Image(G.D2D, Images.LoadFromFile(G.D2D, file));
         }
     }
